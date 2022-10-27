@@ -18,9 +18,7 @@ class web_server(http.server.SimpleHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "text/html; charset=UTF-8")
             self.end_headers()   
-            now = time.localtime()         
-            time1 = time.strftime("%HH:%MM:%SS",now)
-            self.wfile.write(b"Hello World!\n" + time1.encode('utf-8') + b"\n") 
+            self.wfile.write(b"Hello World!\n") 
 
         else:
             super().do_GET() 
