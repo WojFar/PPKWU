@@ -28,6 +28,8 @@ class web_server(http.server.SimpleHTTPRequestHandler):
             time1 = time.strftime("%HH:%MM:%SS",now)
             self.wfile.write(time1.encode(encoding='UTF-8'))
 
+            
+        else:
             super().do_GET()
 
 # --- main ---
