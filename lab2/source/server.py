@@ -33,7 +33,9 @@ class web_server(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(time1.encode(encoding='UTF-8'))
             elif path1.startswith("rev"):
                 splited = path1.split("str=")
-                self.wfile.write(((splited[1])[::-1]).encode(encoding='UTF-8')) 
+                self.wfile.write(((splited[1].split('&')[0])[::-1]).encode(encoding='UTF-8')) 
+            else:
+                self.wfile.write(b"Wrong parameters\n")  
 
 
         else:
