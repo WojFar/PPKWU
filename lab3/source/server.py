@@ -3,7 +3,7 @@ import http.server
 from importlib.resources import path
 import socketserver
 import os
-import time
+import json
 
 
 #print('source code for "http.server":', http.server.__file__)
@@ -23,12 +23,12 @@ class web_server(http.server.SimpleHTTPRequestHandler):
         elif self.path.startswith("/str="):
             self.protocol_version = 'HTTP/1.1'
             self.send_response(200)
-            self.send_header("application/json")
+            self.send_header("Content-type","application/json")
             self.end_headers()
 
-            path1 = self.path[5:]
+            text_to_check = self.path[5:]
             
-            text_to_check = path1.split('&')[0]
+            # text_to_check = path1.split('&')[0]
             
             lowercase = 0
             uppercase = 0
@@ -45,7 +45,7 @@ class web_server(http.server.SimpleHTTPRequestHandler):
                 else:
                     special+=1
                     
-            self.wfile.write(json.dumps({'lowercase': lowercase, 'uppercase': uppercase, 'digits': digits, 'special': special}))
+            self.wfile.write(json.dumps({'lowercase': lowercase, 'uppercase': uppercase, 'digits': digits, 'special': special}).encode())
             
             
 
