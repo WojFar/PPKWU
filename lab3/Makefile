@@ -1,5 +1,5 @@
-docker_name:=lab3
-container_name:=lab3
+docker_name:=lab3_228730
+container_name:=lab3_228730_container
 
 docker_build:
 	echo "Prepare docker here..."
