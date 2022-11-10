@@ -8,6 +8,8 @@ import time
 
 #print('source code for "http.server":', http.server.__file__)
 
+
+
 class web_server(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
@@ -30,7 +32,20 @@ class web_server(http.server.SimpleHTTPRequestHandler):
             
             text_to_check = path1.split('&')[0]
             
+            lowercase = 0
+            uppercase = 0
+            digits = 0
+            special = 0
             
+            for i in text_to_check:
+                if(i.islower()):
+                    lowercase+=1
+                elif(i.isupper()):
+                    uppercase+=1
+                elif(i.isdigit()):
+                    digits+=1
+                else:
+                    special+=1
             
 
 
