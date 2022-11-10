@@ -18,14 +18,12 @@ class web_server(http.server.SimpleHTTPRequestHandler):
 
         if self.path == '/':
             self.protocol_version = 'HTTP/1.1'
-            self.send_response(200)
-            self.send_header("Content-type", "text/html; charset=UTF-8")
+            self.send_response(404)
             self.end_headers()
-            self.wfile.write(b"Hello World!\n")  
         elif self.path.startswith("/str="):
             self.protocol_version = 'HTTP/1.1'
             self.send_response(200)
-            self.send_header("Content-type", "text/html; charset=UTF-8")
+            self.send_header("application/json")
             self.end_headers()
 
             path1 = self.path[5:]
@@ -46,8 +44,10 @@ class web_server(http.server.SimpleHTTPRequestHandler):
                     digits+=1
                 else:
                     special+=1
+                    
+            self.wfile.write(json.dumps({'lowercase': lowercase, 'uppercase': uppercase, 'digits': digits, 'special': special}))
             
-
+            
 
         else:
             super().do_GET()
