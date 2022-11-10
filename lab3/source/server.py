@@ -20,22 +20,18 @@ class web_server(http.server.SimpleHTTPRequestHandler):
             self.send_header("Content-type", "text/html; charset=UTF-8")
             self.end_headers()
             self.wfile.write(b"Hello World!\n")  
-        elif self.path.startswith("/cmd="):
+        elif self.path.startswith("/str="):
             self.protocol_version = 'HTTP/1.1'
             self.send_response(200)
             self.send_header("Content-type", "text/html; charset=UTF-8")
             self.end_headers()
 
             path1 = self.path[5:]
-            if path1=="time":
-                now = time.localtime()         
-                time1 = time.strftime("%HH:%MM:%SS",now)
-                self.wfile.write(time1.encode(encoding='UTF-8'))
-            elif path1.startswith("rev"):
-                splited = path1.split("str=")
-                self.wfile.write(((splited[1].split('&')[0])[::-1]).encode(encoding='UTF-8')) 
-            else:
-                self.wfile.write(b"Wrong parameters\n")  
+            
+            text_to_check = path1.split('&')[0]
+            
+            
+            
 
 
         else:
